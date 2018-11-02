@@ -1,8 +1,3 @@
-# envfile
-
-Rust crate for parsing environment files into an in-memory map.
-
-```rust
 extern crate envfile;
 
 use envfile::EnvFile;
@@ -23,4 +18,3 @@ fn main() -> io::Result<()> {
 
     Ok(())
 }
-```
