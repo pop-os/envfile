@@ -25,19 +25,21 @@
 
 extern crate snailquote;
 
-use std::collections::BTreeMap;
-use std::fs::File;
-use std::io::{self, Read, Write};
-use std::path::Path;
-use std::str;
+use std::{
+    collections::BTreeMap,
+    fs::File,
+    io::{self, Read, Write},
+    path::{Path, PathBuf},
+    str,
+};
 
 use snailquote::{unescape, escape};
 
 
 /// An opened environment file, whose contents are buffered into memory.
-pub struct EnvFile<'a> {
+pub struct EnvFile {
     /// Where the environment file exists in memory.
-    pub path:  &'a Path,
+    pub path:  PathBuf,
     /// The data that was parsed from the file.
     pub store: BTreeMap<String, String>,
 }
@@ -46,7 +48,7 @@ fn parse_line(entry: &[u8]) -> Option<(String, String)> {
     str::from_utf8(entry).ok().and_then(|l| {
         let line = l.trim();
         // Ignore comment line
-        if line.starts_with("#") {
+        if line.starts_with('#') {
             return None;
         }
         let vline = line.as_bytes();
@@ -61,10 +63,11 @@ fn parse_line(entry: &[u8]) -> Option<(String, String)> {
     })
 }
 
-impl<'a> EnvFile<'a> {
+impl EnvFile {
     /// Open and parse an environment file.
-    pub fn new(path: &'a Path) -> io::Result<EnvFile<'a>> {
-        let data = read(path)?;
+    pub fn new<P: Into<PathBuf>>(path: P) -> io::Result<Self> {
+        let path = path.into();
+        let data = read(&path)?;
         let mut store = BTreeMap::new();
 
         let values = data.split(|&x| x == b'\n').flat_map(parse_line);
