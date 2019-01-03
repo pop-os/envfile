@@ -15,7 +15,7 @@ keywords =  ["env", "file"]
 categories = ["parser-implementations"]
 
 [dependencies]
-snailquote = { git = "https://github.com/euank/snailquote" }
+snailquote = "0.2.0"
 
 [dev-dependencies]
 tempdir = "0.3.7"
