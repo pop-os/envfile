@@ -25,13 +25,11 @@
 
 extern crate snailquote;
 
-use std::{
-    collections::BTreeMap,
-    fs::File,
-    io::{self, Read, Write},
-    path::{Path, PathBuf},
-    str,
-};
+use std::collections::BTreeMap;
+use std::fs::File;
+use std::io::{self, Read, Write};
+use std::path::{Path, PathBuf};
+use std::str;
 
 use snailquote::{unescape, escape};
 

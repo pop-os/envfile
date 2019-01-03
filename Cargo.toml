@@ -4,7 +4,8 @@ version = "0.2.1-alpha.0"
 authors = [
 	"Jeremy Soller <jackpot51@gmail.com>",
 	"Michael Aaron Murphy <mmstickman@gmail.com>",
-	"Nguyễn Hồng Quân <ng.hong.quan@gmail.com>"
+	"Nguyễn Hồng Quân <ng.hong.quan@gmail.com>",
+
 ]
 description = "Buffer an environment file into an in-memory map, update the map, and write back to the file"
 repository = "https://github.com/pop-os/envfile"
@@ -14,7 +15,7 @@ keywords =  ["env", "file"]
 categories = ["parser-implementations"]
 
 [dependencies]
-snailquote = "0.1.0"
+snailquote = { git = "https://github.com/euank/snailquote" }
 
 [dev-dependencies]
 tempdir = "0.3.7"
