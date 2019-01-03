@@ -5,7 +5,7 @@ use std::io;
 use std::path::Path;
 
 fn main() -> io::Result<()> {
-    let mut envfile = EnvFile::new(&Path::new("examples/test.env"))?;
+    let mut envfile = EnvFile::new(Path::new("examples/test.env"))?;
 
     for (key, value) in &envfile.store {
         println!("{}: {}", key, value);
