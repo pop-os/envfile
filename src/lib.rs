@@ -139,7 +139,7 @@ mod tests {
     use std::collections::BTreeMap;
     use std::io::Write;
 
-    const SAMPLE: &str = r#"DOUBLE_QUOTED_STRING="This is a double-quoted string"
+    const SAMPLE: &str = r#"DOUBLE_QUOTED_STRING="This is a 'double-quoted' string"
 EFI_UUID=DFFD-D047
 HOSTNAME=pop-testing
 KBD_LAYOUT=us
@@ -155,7 +155,7 @@ ROOT_UUID=2ef950c2-5ce6-4ae0-9fb9-a8c7468fa82c
 SINGLE_QUOTED_STRING='This is a single-quoted string'
 "#;
 
-    const SAMPLE_CLEANED: &str = r#"DOUBLE_QUOTED_STRING="This is a double-quoted string"
+    const SAMPLE_CLEANED: &str = r#"DOUBLE_QUOTED_STRING="This is a 'double-quoted' string"
 EFI_UUID=DFFD-D047
 HOSTNAME=pop-testing
 KBD_LAYOUT=us
@@ -165,7 +165,7 @@ LANG=en_US.UTF-8
 OEM_MODE=0
 RECOVERY_UUID=PARTUUID=asdfasd7asdf7sad-asdfa
 ROOT_UUID=2ef950c2-5ce6-4ae0-9fb9-a8c7468fa82c
-SINGLE_QUOTED_STRING="This is a single-quoted string"
+SINGLE_QUOTED_STRING='This is a single-quoted string'
 "#;
 
     #[test]
@@ -190,7 +190,7 @@ SINGLE_QUOTED_STRING="This is a single-quoted string"
             map.insert("RECOVERY_UUID".into(), "PARTUUID=asdfasd7asdf7sad-asdfa".into());
             map.insert("ROOT_UUID".into(), "2ef950c2-5ce6-4ae0-9fb9-a8c7468fa82c".into());
             map.insert("OEM_MODE".into(), "0".into());
-            map.insert("DOUBLE_QUOTED_STRING".into(), "This is a double-quoted string".into());
+            map.insert("DOUBLE_QUOTED_STRING".into(), "This is a 'double-quoted' string".into());
             map.insert("SINGLE_QUOTED_STRING".into(), "This is a single-quoted string".into());
             map
         });
@@ -210,6 +210,6 @@ SINGLE_QUOTED_STRING="This is a single-quoted string"
         env.write().unwrap();
         let copy: &[u8] = &read(path).unwrap();
 
-        assert_eq!(copy, SAMPLE_CLEANED.as_bytes());
+        assert_eq!(copy, SAMPLE_CLEANED.as_bytes(), "Expected '{}' == '{}'", String::from_utf8_lossy(copy), SAMPLE_CLEANED);
     }
 }
