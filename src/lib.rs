@@ -78,8 +78,9 @@ impl EnvFile {
     }
 
     /// Update or insert a key into the map.
-    pub fn update(&mut self, key: &str, value: &str) {
+    pub fn update(&mut self, key: &str, value: &str) -> &mut Self {
         self.store.insert(key.into(), value.into());
+        self
     }
 
     /// Fetch a key from the map.

@@ -1,11 +1,10 @@
 [package]
 name = "envfile"
-version = "0.2.1-alpha.0"
+version = "0.2.1"
 authors = [
 	"Jeremy Soller <jackpot51@gmail.com>",
 	"Michael Aaron Murphy <mmstickman@gmail.com>",
 	"Nguyễn Hồng Quân <ng.hong.quan@gmail.com>",
-
 ]
 description = "Buffer an environment file into an in-memory map, update the map, and write back to the file"
 repository = "https://github.com/pop-os/envfile"
